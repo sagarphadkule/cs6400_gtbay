@@ -1,0 +1,338 @@
+{
+	"info": {
+		"_postman_id": "0ade4e0d-768f-4208-b88d-9ef04b7973b3",
+		"name": "GtBay",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Aravind",
+			"description": "",
+			"item": [
+				{
+					"name": "Item",
+					"description": "",
+					"item": [
+						{
+							"name": "Add Item",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "username",
+										"value": "johnd"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"LG TV\",\n    \"description\": \"LG 65 \\\" OLED TV\",\n    \"category\": \"Electronics\",\n    \"condition\": \"1\",\n    \"startingBidPrice\" : 200,\n    \"minimumSalePrice\" : 600,\n    \"getItNowPrice\": 699,\n    \"auctionLength\": 3,\n    \"returnable\": false\n}"
+								},
+								"url": {
+									"raw": "localhost:8080/item/addItem",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"item",
+										"addItem"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Item Details",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "username",
+										"value": "johnd"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "localhost:8080/item/{{itemId}}/details",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"item",
+										"{{itemId}}",
+										"details"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Item Ratings",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "username",
+										"value": "johnd"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "localhost:8080/item/{{itemId}}/getRatings",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"item",
+										"{{itemId}}",
+										"getRatings"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Search Items",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "username",
+										"value": "johnd"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"keyWord\": \"TV\",\n\t\"category\": \"Electronics\",\n\t\"minimumPrice\": 500,\n\t\"maximumPrice\": 1000,\n\t\"condition\": \"new\"\n}"
+								},
+								"url": {
+									"raw": "localhost:8080/item/searchItems",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"item",
+										"searchItems"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Description",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "username",
+										"value": "johnd"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"description\": \"75 inch LED TV\"\n}"
+								},
+								"url": {
+									"raw": "localhost:8080/item/{{itemId}}/updateDescription",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"item",
+										"{{itemId}}",
+										"updateDescription"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Bid Item",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "username",
+										"value": "johnd"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \n\t\"amount\": 75.00\n}"
+								},
+								"url": {
+									"raw": "localhost:8080/item/{{itemId}}/bidItem",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"item",
+										"{{itemId}}",
+										"bidItem"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Buy Item",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "username",
+										"value": "johnd"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \n\t\"amount\": 75.00\n}"
+								},
+								"url": {
+									"raw": "localhost:8080/item/{{itemId}}/buyItem",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"item",
+										"{{itemId}}",
+										"buyItem"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add rating",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "username",
+										"value": "johnd"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \n\t\"numberOfStars\": 5,\n\t\"comment\": \"Great Product\",\n\t\"ratedBy\": \"johnd\"\n}"
+								},
+								"url": {
+									"raw": "localhost:8080/item/{{itemId}}/addRating",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"item",
+										"{{itemId}}",
+										"addRating"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "User registration",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"userName\" : \"aravindram87\",\n\t\"password\": \"admin\",\n\t\"firstName\": \"Aravind\",\n\t\"lastName\": \"Ranganathan\"\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/register",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"userName\" : \"aravindram87\",\n\t\"password\": \"admin\"\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

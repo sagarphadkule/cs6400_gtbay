@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="row" class="text-center">
+    <p>Welcome to GTBay!!!</p>
+    <small *ngIf="isAdmin">Your current position is {{ position }}</small>
+  </div>
+</div>
+<ul>
+  <li><a routerLink="/search">Search for items</a></li>
+  <li><a routerLink="/new">List an item for sale</a></li>
+  <li><a routerLink="/auctionResults">View auction results</a></li>
+  <li *ngIf="isAdmin"><a routerLink="/categoryReport">View category report</a></li>
+  <li *ngIf="isAdmin"><a routerLink="/userReport">View user report</a></li>
+</ul>
+
+

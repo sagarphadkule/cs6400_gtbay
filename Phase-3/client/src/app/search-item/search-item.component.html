@@ -1,0 +1,49 @@
+<form (ngSubmit)="onSubmit()" #searchForm="ngForm">
+  <h5>Item Search</h5>
+  <hr>
+  <div class="form-group">
+    <label for="keyword">Keyword</label>
+    <input type="text" class="form-control" id="keyword"
+           [(ngModel)]="criteria.keyword" name="keyword" #keyword="ngModel">
+    <small class="form-text" *ngIf="!keyword.valid && keyword.touched">Please enter your first name</small>
+  </div>
+  <div class="form-group">
+    <label for="category">Category</label>
+    <select class="form-control" id="category" [(ngModel)]="criteria.category" name="category" #category="ngModel">
+      <option></option>
+      <option *ngFor="let category of categories$ | async">{{ category }}</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="min-price">Minimum Price $ </label>
+    <input type="number" class="form-control" id="min-price"
+           [(ngModel)]="criteria.minPrice" name="minPrice" #minPrice="ngModel"
+            [ngClass]="{'ng-invalid': !checkValue()}">
+    <small class="form-text" *ngIf="!checkValue()">Minimum price must be lower than or equal to maximum price</small>
+  </div>
+  <div class="form-group">
+    <label for="max-price">Maximum price $ </label>
+    <input type="number" class="form-control" id="max-price"
+           [(ngModel)]="criteria.maxPrice" name="maxPrice" #maxPrice="ngModel"
+            [ngClass]="{'ng-invalid': !checkValue()}">
+    <small class="form-text" *ngIf="!checkValue()">Maximum price must be higher than or equal to minimum price</small>
+
+  </div>
+  <div class="form-group">
+    <label for="condition">Condition at least</label>
+    <select class="form-control" id="condition"
+            [(ngModel)]="criteria.conditionAtLeast" name="conditionAtLeast" #conditionAtLeast="ngModel">
+      <option></option>
+      <option *ngFor="let condition of conditions$ | async">{{ condition }}</option>
+    </select>
+  </div>
+
+  <hr>
+  <div class="float-right">
+    <button type="button" class="btn btn-primary" style="width: 100px" (click)="onCancel()">Cancel</button>
+    <button type="submit" class="btn btn-primary" style="width: 100px"
+            [disabled]="!searchForm.valid || !checkValue()">Search</button>
+  </div>
+</form>
+<br>

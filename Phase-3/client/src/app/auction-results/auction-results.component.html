@@ -1,0 +1,18 @@
+<div>
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Item Name</th>
+      <th>Sale Price</th>
+      <th>Winner</th>
+      <th>Auction Ended</th>
+    </tr>
+    <tr *ngFor="let ar of auctionResults">
+      <td> {{ar.itemId }}</td>
+      <td> {{ar.itemName}}</td>
+      <td> $ {{ar.salePrice}}</td>
+      <td> {{ar.winner}}</td>
+      <td> {{ar.auctionEndTimeStamp | date: 'yyyy-MM-dd hh:mm a'}}</td>
+    </tr>
+  </table>
+</div>

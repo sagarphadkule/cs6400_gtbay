@@ -1,0 +1,16 @@
+Team011:
+Sagar Phadkule     email: sphadkule3@gatech.edu
+Aravind Ranganathan    email: aranganathan9@gatech.edu
+Jen-Chieh Chiang    email: jchiang36@gatech.edu
+Charles Harvan    email: charvan3@gatech.edu
+
+# Files containing SQL Queries:
+
+## CREATE TABLE queries:
+- Phase-3/team011_p3_schema.sql
+
+## Implemented in app:
+- *DaoImpl.java classes contain SQL queries, which can be found in the folder:
+Phase-3\server\src\main\java\com\gatech\cs6400\gtbay\gtbayrestservice\Dao
+- Queries.java file containing constant strings of SQL queries in the file:
+Phase-3\server\src\main\java\com\gatech\cs6400\gtbay\gtbayrestservice\constant

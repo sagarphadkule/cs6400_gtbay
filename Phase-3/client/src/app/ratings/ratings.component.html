@@ -1,0 +1,62 @@
+<div *ngIf="ratings$ | async as ratings">
+  <p>
+    <strong>Item ID:</strong><span *ngIf="itemId"> {{itemId}}</span><br />
+    <strong>Item Name:</strong><span *ngIf="item"> {{item.name}}</span><br />
+    <strong>Average Rating:<span *ngIf="ratings[0]"> {{ratings[0].avgStars | number:'1.1-1'}} stars</span></strong><br />
+    </p>
+  
+    <table cellspacing="5">
+      <tr *ngFor="let rating of ratings$ | async">
+  
+        <td>
+            <table style="height: 58px; width: 648px; border: 1px solid #000000;" cellpadding="5">
+                <tbody>              
+                  <tr>
+                    <td style="width: 65px; height: 21px;"><strong>{{rating.stars}} / 5</strong></td>
+                    <td style="width: 184px; height: 21px;">Rated By: {{rating.ratedByUser}}</td>
+                    <td style="width: 263px; height: 21px;">Date: {{rating.timestamp | date: 'yyyy-MM-dd hh:mm a'}}</td>
+                    <td style="width: 130px; text-align: right; height: 21px;">
+                      <button class="btn btn-primary" *ngIf="createdByCurrentUser(rating.ratedByUser)"
+                      (click)="onDelete(rating.ratedItemId, rating.ratedByUser)">
+                        Delete my rating
+                    </button>
+                    </td>
+                  </tr>
+                  <tr style="height: 42px;">
+                    <td style="width: 648px;" colspan="4">
+                      <em>{{rating.comment}}</em>
+                    </td>
+                  </tr>
+              </tbody>
+            </table>
+        </td>
+  
+      </tr>
+    </table>
+</div>
+
+<br /><br />
+<div>
+<form (ngSubmit)="onSubmit()" #ratingForm="ngForm">
+  <label for="myRating">My Rating:</label>
+  <select class="form-control" id="myRating" required [(ngModel)]="newRating.stars" name="stars" #stars="ngModel" 
+  style="width:80px" [disabled]="ratingsByLoggedInUserCount == 1">
+  <option>0</option>
+  <option>1</option>
+  <option>2</option>
+  <option>3</option>
+  <option>4</option>
+  <option>5</option>
+</select>
+<!-- <input type="text" id="myRating" required [(ngModel)]="newRating.stars" name="stars" #stars="ngModel"><br /> -->
+
+<label for="myComment">Comments:</label><br />
+<textarea id="myComment" [(ngModel)]="newRating.comment" name="comment" #comment="ngModel" 
+style="width:550px; height:100px" [disabled]="ratingsByLoggedInUserCount == 1">
+</textarea>
+<br />
+
+<button class="btn btn-primary" [disabled]="!ratingForm.valid || ratingsByLoggedInUserCount == 1" type="submit">Submit</button> 
+<button class="btn btn-primary" (click)="onCancel()" type="button">Cancel</button>
+</form>
+</div>

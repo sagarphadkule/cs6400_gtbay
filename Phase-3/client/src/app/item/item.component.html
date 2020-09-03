@@ -1,0 +1,122 @@
+<div *ngIf="item$ | async as item">
+  <div>
+    <table>
+      <tr>
+        <th>
+          <p>Item ID </p>
+        </th>
+        <th>
+          {{item.id}} -
+          <a [routerLink]="['/ratings', item.id]">View Ratings</a>
+        </th>
+      </tr>
+      <tr>
+        <td>
+          Item Name
+        </td>
+        <td>
+          {{item.name}}
+        </td>
+      </tr>
+      <tr *ngIf="item.winner == null && createdByCurrentUser(item.listedByUser)">
+        <td>
+          Description
+        </td>
+        <td>
+          <input id="description" [(ngModel)]="item.description" placeholder="Description">
+          <button class="btn btn-primary" *ngIf="item.winner == null"
+                  (click)="editDescription(item.description, item.id)">Edit description
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Category
+        </td>
+        <td>
+          {{item.category}}
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Condition
+        </td>
+        <td>
+          {{item.condition}}
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Returns Accepted ?
+        </td>
+        <td>
+          <input type="checkbox" disabled="true" checked="{{item.returnable}}">
+        </td>
+      </tr>
+      <tr *ngIf="item.getItNowPrice !== null && item.winner == null">
+        <td>
+          Get It Now Price
+        </td>
+        <td>
+          {{item.getItNowPrice | currency:
+          'USD': "symbol": '1.2-2'}}
+          <button class="btn btn-primary" *ngIf="item.getItNowPrice !== null" (click)="onGetItNow(item)">Get it now!
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Auction Ends
+        </td>
+        <td>
+          {{item.auctionEndTime | date: 'yyyy-MM-dd hh:mm a'}}
+        </td>
+      </tr>
+    </table>
+  </div>
+  <p></p>
+  <div *ngIf="bids !== undefined && bids[0] !== undefined">
+  <h4>Latest Bids</h4>
+  <table *ngIf="bids">
+    <tr>
+      <th>
+        Bid Amount
+      </th>
+      <th>
+        Time of Bid
+      </th>
+      <th>
+        Username
+      </th>
+    </tr>
+    <tr *ngFor="let bid of bids">
+      <td>
+        {{bid.amount | currency:
+        'USD': "symbol": '1.2-2'}}
+      </td>
+      <td>
+        {{bid.timestamp | date: 'yyyy-MM-dd hh:mm a'}}
+      </td>
+      <td>
+        {{bid.bidByUser}}
+      </td>
+    </tr>
+  </table>
+  </div>
+  <h3><p *ngIf="item.winner !== null">The winner is {{item.winner}} !!!</p></h3>
+  <p></p>
+  <div *ngIf="item.winner == null">
+    Your Bid $<input size="6" id="myBid" [(ngModel)]="myBid" required /><p>{{message}}</p>
+    <p *ngIf="bids !== undefined && bids[0] !== undefined ;else other_content">(Minimum bid {{bids[0].amount + 1  | currency:
+      'USD': "symbol": '1.2-2'}})</p>
+    <p>
+    <ng-template #other_content>(Minimum bid {{item.startingBidPrice  | currency:
+      'USD': "symbol": '1.2-2'}})</ng-template>
+    </p>
+    <button class="btn btn-primary" *ngIf="item.getItNowPrice !== null" (click)="placeBid(item)">Bid on this item</button>
+  </div>
+  <p></p>
+  <div>
+    <button class="btn btn-primary" (click)="onBack()">Back to search results</button>
+  </div>
+</div>

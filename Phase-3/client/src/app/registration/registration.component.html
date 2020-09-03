@@ -1,0 +1,46 @@
+<form (ngSubmit)="onRegister()" #registrationForm="ngForm">
+  <h5>GTBay New User Registration</h5>
+  <hr>
+  <!--{{diagnostic}}-->
+  <div class="form-group">
+    <label for="firstname">First Name:</label>
+    <input type="text" class="form-control" id="firstname" required
+      [(ngModel)]="user.firstName" name="firstName" #firstname="ngModel">
+    <small class="form-text" *ngIf="!firstname.valid && firstname.touched">Please enter your first name</small>
+  </div>
+
+  <div class="form-group">
+    <label for="lastname">Last Name:</label>
+    <input type="text" class="form-control" id="lastname" required
+      [(ngModel)]="user.lastName" name="lastname" #lastname="ngModel">
+    <small class="form-text" *ngIf="!lastname.valid && lastname.touched">Please enter your last name</small>
+  </div>
+
+  <div class="form-group">
+    <label for="username">Username:</label>
+    <input type="text" class="form-control" id="username" required
+      [(ngModel)]="user.username" name="userame" #username="ngModel"
+           (focus)="duplicatedUsername=false;" [ngClass]="{'ng-invalid': duplicatedUsername===true}">
+    <small class="form-text" *ngIf="!username.valid && username.touched">Please create an username</small>
+    <small class="form-text" *ngIf="duplicatedUsername">Username has been used, please choose another username</small>
+  </div>
+  <div class="form-group">
+    <label for="password">Password:</label>
+    <input type="password" class="form-control" id="password" required
+      [(ngModel)]="user.password" name="pssword" #password="ngModel">
+    <small class="form-text" *ngIf="!password.valid && password.touched">Please create a password</small>
+  </div>
+  <div class="form-group">
+    <label for="confirmPassword">Confirm Password:</label>
+    <input type="password" class="form-control" id="confirmPassword" required
+      ngModel name="confirmPassword" #confirmPassword="ngModel">
+    <small class="form-text" *ngIf="!confirmPassword.valid && confirmPassword.touched">Please confirm your password</small>
+    <small class="form-text" *ngIf="confirmPassword.valid && user.password !== confirmPassword.value">Passwords don't match!!!</small>
+  </div>
+  <hr>
+  <div class="float-right">
+    <button type="submit" class="btn btn-primary" style="width: 100px" routerLink="/login">Cancel</button>
+    <button type="submit" class="btn btn-primary" style="width: 100px"
+            [disabled]="!registrationForm.valid || user.password !== confirmPassword.value || duplicatedUsername">Register</button>
+  </div>
+</form>

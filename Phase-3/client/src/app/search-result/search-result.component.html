@@ -1,0 +1,32 @@
+<h3>Search Result</h3>
+<hr>
+<div>
+  <!--<table *ngIf="results$; else noResult">-->
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Item Name</th>
+      <th>Current Bid</th>
+      <th>High Bidder</th>
+      <th>Get It Now Price</th>
+      <th>Auction Ends</th>
+    </tr>
+    <tr *ngFor="let result of results$ | async">
+      <td>{{ result.id }}</td>
+      <td><a [routerLink]="['/item', result.id]">{{ result.name }}</a></td>
+      <td>{{ result.currentBid === null? '-' : result.currentBid  | currency:
+        'USD': "symbol": '1.2-2'}}</td>
+      <td>{{ result.highBidder === null? '-': result.highBidder}}</td>
+      <td>{{ result.getItNowPrice === null? '-': result.getItNowPrice  | currency:
+        'USD': "symbol": '1.2-2'}}</td>
+      <td>{{ result.auctionEnds | date: 'yyyy-MM-dd hh:mm a'}}</td>
+    </tr>
+  </table>
+</div>
+
+<!--<ng-template #noResult>-->
+  <!--<p>-->
+    <!--Sorry, no matched item...-->
+  <!--</p></ng-template>-->
+<hr>
+<button class="btn btn-primary" (click)="onBack()">Back to search</button>

@@ -1,0 +1,90 @@
+<form (ngSubmit)="onSubmit()" #listingForm="ngForm">
+  <h5>New Item for Auction</h5>
+  <hr>
+  <!--{{diagnostic}}-->
+  <div class="form-group">
+    <label for="itemName">Item Name:</label>
+    <input type="text" class="form-control" id="itemName" required
+           [(ngModel)]="item.name" name="name" #name="ngModel">
+    <small class="form-text" *ngIf="!name.valid && name.touched">Please enter item name</small>
+  </div>
+
+  <div class="form-group">
+    <label for="description">Description:</label>
+    <textarea class="form-control" id="description" required
+              [(ngModel)]="item.description" name="description" #description="ngModel"></textarea>
+    <small class="form-text" *ngIf="!description.valid && description.touched">Please enter item description</small>
+  </div>
+
+  <div class="form-group">
+    <label for="category">Category</label>
+    <select class="form-control" id="category" required
+            [(ngModel)]="item.category" #category="ngModel" name="category">
+      <option></option>
+      <option *ngFor="let category of this.categories$ | async">{{ category }}</option>
+    </select>
+    <small class="form-text" *ngIf="!category.valid && category.touched">Please select a category</small>
+  </div>
+
+  <div class="form-group">
+    <label for="condition">Condition</label>
+    <select class="form-control" id="condition" required
+            [(ngModel)]="item.itemConditionName" #condition="ngModel" name="condition">
+      <option></option>
+      <option *ngFor="let condition of this.conditions$ | async; let i = index">{{ condition }}</option>
+    </select>
+    <small class="form-text" *ngIf="!condition.valid && condition.touched">
+      Please select a condition that matches your item
+    </small>
+  </div>
+
+  <div class="form-group">
+    <label for="starting-big">Start auction bidding at $ </label>
+    <input type="number" class="form-control" id="starting-big" required
+           [(ngModel)]="item.startingBidPrice" #startingBidPrice="ngModel" name="startingBidPrice">
+    <small class="form-text" *ngIf="!startingBidPrice.valid && startingBidPrice.touched">
+      Please enter your desired starting bid price
+    </small>
+  </div>
+
+  <div class="form-group">
+    <label for="min-sale-price">Minimum sale price $ </label>
+    <input type="number" class="form-control" id="min-sale-price" required
+           [(ngModel)]="item.minSalePrice" #minSalePrice="ngModel" name="minSalePrice">
+    <small class="form-text" *ngIf="!minSalePrice.valid && minSalePrice.touched">
+      Please set a minimum sold price for your item
+    </small>
+  </div>
+
+  <div class="form-group">
+    <label for="auctionLength">Auction ends in how many days?</label>
+    <select class="form-control" id="auctionLength" required
+            [(ngModel)]="item.auctionLength" #auctionLength="ngModel" name="auctionLength">
+      <option *ngFor="let auctionLength of [1,3,5,7]">{{ auctionLength }}</option>
+    </select>
+    <small class="form-text" *ngIf="!auctionLength.valid && auctionLength.touched">
+      Please select the duration of your auction
+    </small>
+  </div>
+
+  <div class="form-group">
+    <label for="getItNowPrice">Get it now price:</label>
+    <input type="number" class="form-control" id="getItNowPrice" placeholder="This is optional"
+           [(ngModel)]="item.getItNowPrice" #getItNowPrice="ngModel" name="getItNowPrice">
+  </div>
+
+  <div class="form-group">
+  <label for="returnable">Return Accepted? </label>
+  <input type="checkbox" class="form-control" id="returnable"
+         [(ngModel)]="item.returnable" #returnable="ngModel" name="returnable">
+  </div>
+
+  <hr>
+  <div class="float-right">
+    <button class="btn btn-primary" style="width: 100px" routerLink="/main">Cancel</button>
+    <button type="submit" class="btn btn-primary" style="width: 100px" [disabled]="!listingForm.valid">List Item</button>
+  </div>
+</form>
+<br>
+
+

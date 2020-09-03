@@ -1,0 +1,42 @@
+<div *ngIf="currentUrl == '/categoryReport'">
+<table>
+  <tr>
+    <th>Category</th>
+    <th>Total Items</th>
+    <th>Min Price</th>
+    <th>Max Price</th>
+    <th>Average Price</th>
+  </tr>
+  <tr *ngFor="let report of categoryReport">
+    <td>{{ report.category }}</td>
+    <td>{{ report.totalItems}}</td>
+    <td>{{ report.minPrice | currency:
+      'USD': "symbol": '1.2-2'}}</td>
+    <td>{{ report.maxPrice  | currency:
+      'USD': "symbol": '1.2-2'}}</td>
+    <td>{{ report.averagePrice  | currency:
+      'USD': "symbol": '1.2-2'}}</td>
+  </tr>
+</table>
+</div>
+
+<div *ngIf="currentUrl == '/userReport'">
+  <table>
+    <tr>
+      <th>Username</th>
+      <th>Listed</th>
+      <th>Sold</th>
+      <th>Purchased</th>
+      <th>Rated</th>
+    </tr>
+    <tr *ngFor="let report of userReport">
+      <td>{{ report.userName }}</td>
+      <td>{{ report.listed}}</td>
+      <td>{{ report.sold}}</td>
+      <td>{{ report.purchased }}</td>
+      <td>{{ report.rated }}</td>
+    </tr>
+  </table>
+</div>
+
+

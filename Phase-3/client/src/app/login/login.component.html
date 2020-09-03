@@ -1,0 +1,25 @@
+<form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+  <h5>GTBay Login</h5>
+  <hr>
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input type="text" class="form-control" id="username" #loginUsername="ngModel"
+           required [(ngModel)]="username" name="username" (focus)="loginFailed = false">
+    <small class="form-text" *ngIf="!loginUsername.valid && loginUsername.touched">Please enter your username</small>
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" class="form-control" id="password" #loginPassword="ngModel"
+           required [(ngModel)]="password" name="password" (focus)="loginFailed = false">
+    <small class="form-text" *ngIf="!loginPassword.valid && loginPassword.touched">Please enter you password</small>
+  </div>
+  <hr>
+  <small class="form-text" *ngIf="loginFailed">Invalid username and password combination!</small>
+  <div class="float-right">
+    <!--<button type="submit" class="btn btn-primary" style="width: 100px" (click)="onRegister()">Register</button>-->
+    <button  type="button" class="btn btn-primary" style="width: 100px" routerLink="/register">Register</button>
+    <button type="submit" class="btn btn-primary" style="width: 100px"
+      [disabled]="!loginForm.valid || loginFailed">Login</button>
+  </div>
+</form>
+<br>
